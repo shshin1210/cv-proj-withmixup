@@ -12,11 +12,13 @@ Go to [dataset page in our kaggle page for this challenge (CIFAR100-NoisyLabel)]
 
 ### files
 
+make sure dataset file is well organized as below
+
 ```
-cv-proj
-├── dataset
-├── models
-├── tools
+cv-proj-withmixup
+├── model (file)
+├── main_cifar100.py
+├── utils.py
 `── dataset
     │── dataset.py
     │── data
