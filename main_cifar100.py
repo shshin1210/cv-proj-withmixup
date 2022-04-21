@@ -1,4 +1,3 @@
-"""Train CIFAR100 with PyTorch."""
 from __future__ import print_function
 
 import argparse
@@ -109,15 +108,18 @@ def shuffle_minibatch(inputs, targets, mixup=True):
     targets2_oh = y_onehot2.scatter_(1, targets2_1, 1)
 
     if mixup is True:
-        a = numpy.random.beta(1, 1, [batch_size, 1]) # beta distribution 
+        # make a from beta distribution 
+        a = numpy.random.beta(1, 1, [batch_size, 1]) 
     else:
         a = numpy.ones((batch_size, 1))
-                                                       # a[..., None, None] = (128,1) -> (128,1,1,1) to 4 dim 
-    b = numpy.tile(a[..., None, None], [1, 3, 32, 32]) # numpy.tile(A,reps) Construct an array by repeating A the number of times given by reps.
+    
+    # lambda
+    b = numpy.tile(a[..., None, None], [1, 3, 32, 32]) # numpy.tile(A,reps)
 
     inputs1 = inputs1 * torch.from_numpy(b).float() 
     inputs2 = inputs2 * torch.from_numpy(1 - b).float() 
-
+    
+    # lambda
     c = numpy.tile(a, [1, num_classes])
 
     targets1_oh = targets1_oh.float() * torch.from_numpy(c).float() # multiply weights
@@ -211,7 +213,4 @@ plt.ylabel('Accuracy')
 plt.legend(['train','test'])
 plt.plot(epochs, accuracy_list_train) 
 plt.plot(epochs, accuracy_list_test) 
-plt.savefig('cifar100-.png')
-
-print(accuracy_list_test)
-print(max(accuracy_list_test))
+plt.savefig('cifar100.png')
