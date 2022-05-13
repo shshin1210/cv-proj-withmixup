@@ -47,3 +47,5 @@ Train & test for cifar100 with mixup
 ```
 python main_cifar100.py --mixup --exp='cifar100_mixup'
 ```
+
+reference : https://github.com/leehomyc/mixup_pytorch
